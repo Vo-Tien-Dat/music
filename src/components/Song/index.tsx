@@ -1,3 +1,3 @@
-import Song from "./song";
+import Song from './song';
 
 export default Song;
