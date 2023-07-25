@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Avatar } from 'antd';
+import { Avatar, Typography } from 'antd';
 import ISong from './ISong';
 import IOtherSong from './IOtherSong';
 import ISongEvent from './ISongEvent';
@@ -12,69 +12,69 @@ import classNames from 'classnames';
 export type SongPropsType = ISong & IOtherSong & ISongEvent & ISongStatus;
 
 const initSong: SongPropsType = {
-    id: 0,
-    title: '',
-    artist: '',
-    image: '',
-    time: '00:00',
-    isFavorite: true,
-    isActive: false,
-    isHover: true,
+	id: 0,
+	title: '',
+	artist: '',
+	image: '',
+	time: '00:00',
+	isFavorite: true,
+	isActive: false,
+	isHover: true,
 };
 
 const Song = (props: SongPropsType): React.ReactNode => {
-    const [isActiveFavorite, setActiveFavorite] = useState(
-        props.isFavorite ?? initSong.isFavorite
-    );
+	const [isActiveFavorite, setActiveFavorite] = useState(
+		props.isFavorite ?? initSong.isFavorite
+	);
 
-    const [isActivePlay, setActivePlay] = useState(
-        props.isActive ?? initSong.isActive
-    );
+	const [isActivePlay, setActivePlay] = useState(
+		props.isActive ?? initSong.isActive
+	);
 
-    const handleClickFavorite = (e: any) => {
-        setActiveFavorite(!isActiveFavorite);
-        props.onClickFavorite?.(props.id ?? initSong.id);
-        e.stopPropagation();
-    };
+	const handleClickFavorite = (e: any) => {
+		setActiveFavorite(!isActiveFavorite);
+		props.onClickFavorite?.(props.id ?? initSong.id);
+		e.stopPropagation();
+	};
 
-    const handleClickPlay = (e: any) => {
-        setActivePlay(!isActivePlay);
-        props.onClickPlay?.('');
-    };
+	const handleClickPlay = (e: any) => {
+		setActivePlay(!isActivePlay);
+		props.onClickPlay?.('');
+	};
 
-    return (
-        <div
-            className={classNames(
-                'flex flex-row items-center justify-between px-2 py-2 w-full bg-neutral-800 rounded-md',
-                { 'hover:bg-neutral-700': props.isHover ?? initSong.isHover },
-                { 'bg-neutral-500': isActivePlay }
-            )}
-            onClick={handleClickPlay}
-        >
-            <div className="flex flex-row items-center justify-start shrink">
-                {props.pos && <div className="text-base">{props.pos}</div>}
-                <Avatar shape="square" size={48} className="ml-2" />
-                <div className="flex flex-col ml-1">
-                    <div className="text-base">
-                        {props.title ?? initSong.title}
-                    </div>
-                    <div className="text-base">
-                        {props.artist ?? initSong.artist}
-                    </div>
-                </div>
-            </div>
-            <div className="flex flex-row items-center">
-                <FontAwesomeIcon
-                    icon={isActiveFavorite ? faInActiveHeart : faActiveHeart}
-                    className="text-base"
-                    onClick={handleClickFavorite}
-                />
-                <div className="text-base ml-2">
-                    {props.time ?? initSong.time}
-                </div>
-            </div>
-        </div>
-    );
+	return (
+		<div
+			className={classNames(
+				'flex flex-row items-center justify-between px-3 py-2 w-full bg-neutral-800 rounded-md',
+				{ 'hover:bg-neutral-700': props.isHover ?? initSong.isHover },
+				{ 'bg-neutral-500': isActivePlay }
+			)}
+			onClick={handleClickPlay}
+		>
+			<div className="flex flex-row items-center justify-start shrink">
+				{props.pos && <div className="text-base">{props.pos}</div>}
+				<Avatar shape="square" size={48} className="ml-2" />
+				<div className="flex flex-col ml-1">
+					<div className="text-base">
+						{props.title ?? initSong.title}
+					</div>
+					<div className="text-base">
+						{props.artist ?? initSong.artist}
+					</div>
+				</div>
+			</div>
+			<div className="flex flex-row items-center gap-2">
+				<FontAwesomeIcon
+					icon={isActiveFavorite ? faInActiveHeart : faActiveHeart}
+					className="text-base text-white"
+					onClick={handleClickFavorite}
+				/>
+				<Typography className="text-sm text-white font-semibold">
+					{props.time ?? initSong.time}
+				</Typography>
+			</div>
+		</div>
+	);
 };
 
 export default Song;

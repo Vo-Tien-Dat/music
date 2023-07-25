@@ -1,4 +1,4 @@
 export default interface ISongStatus {
-    isActive?: boolean;
-    isHover?: boolean;
+	isActive?: boolean;
+	isHover?: boolean;
 }

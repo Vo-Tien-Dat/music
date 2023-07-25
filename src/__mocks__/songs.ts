@@ -1,21 +1,123 @@
 import { SongPropsType } from '@/components/Song/song';
+import { ISongForAlbum } from '@/components/SongForAlbum';
+const songs: Required<ISongForAlbum>[] = [
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
 
-const songs: SongPropsType[] = [
-    {
-        id: 1,
-        title: 'The Beatles',
-        artist: 'The Beatles',
-    },
-    {
-        id: 1,
-        title: 'The Beatles',
-        artist: 'The Beatles',
-    },
-    {
-        id: 1,
-        title: 'The Beatles',
-        artist: 'The Beatles',
-    },
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
+
+	{
+		id: '1',
+		name: 'The Beatles',
+		artist: 'The Beatles',
+		time: '10:01',
+		isFavorite: true,
+	},
 ];
 
 export default songs;

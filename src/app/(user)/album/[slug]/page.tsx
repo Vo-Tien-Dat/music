@@ -2,111 +2,85 @@
 
 import { TemplateString } from 'next/dist/lib/metadata/types/metadata-types';
 import songs from '__mocks__/songs';
-import Song from '@/components/Song';
-import SongControl from '@/components/SongControl';
-import ISong from '@/components/Song/ISong';
-import { ReactNode, useState } from 'react';
-import ISongEvent from '@/components/Song/ISongEvent';
-import { Avatar } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Space } from 'antd';
+
+import { ReactNode, useCallback, useState } from 'react';
+import { ISongForAlbum } from '@/components/SongForAlbum';
+import Avatar from '@/components/ArtistAvatar';
 import {
-    faPause,
-    faPlay,
-    faHeart as faSolidHeart,
+	faPause,
+	faPlay,
+	faHeart as faSolidHeart,
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons';
+import SongForAlbum from '@/components/SongForAlbum';
+import SongForAlbunContainer from 'containers/SongForAlbumContainer';
+import Control from '@/components/Control';
+import Header from '@/components/Header';
 function getSongItem({
-    id,
-    title,
-    time,
-    onClickPlay,
-    onClickFavorite,
-}: ISong & ISongEvent): ReactNode {
-    return (
-        <Song
-            key={id}
-            id={id}
-            title={title}
-            time={time}
-            onClickFavorite={onClickFavorite}
-            onClickPlay={onClickPlay}
-        />
-    );
+	id,
+	name,
+	artist,
+	isFavorite,
+	time,
+}: Required<ISongForAlbum>): ReactNode {
+	return (
+		<SongForAlbum
+			key={0}
+			id={id}
+			name={name}
+			artist={artist}
+			time={time}
+			isFavorite={isFavorite}
+		/>
+	);
 }
 
 const handleClickFavorite = (id: string | number) => {
-    console.log(id);
+	console.log(id);
 };
 
 const handleClickPlay = (id: string | number) => {
-    console.log(id);
+	console.log(id);
 };
 
 const items: ReactNode[] = [
-    getSongItem({
-        ...songs[0],
-        onClickFavorite: handleClickFavorite,
-        onClickPlay: handleClickPlay,
-    }),
-    getSongItem({
-        ...songs[1],
-        onClickFavorite: handleClickFavorite,
-        onClickPlay: handleClickPlay,
-    }),
-    getSongItem(songs[2]),
-    getSongItem(songs[2]),
-    getSongItem(songs[2]),
-    getSongItem(songs[2]),
-    getSongItem(songs[2]),
-    getSongItem(songs[2]),
+	getSongItem(songs[0]),
+	getSongItem(songs[0]),
+	getSongItem(songs[0]),
+	getSongItem(songs[0]),
+	getSongItem(songs[0]),
+	getSongItem(songs[0]),
+	getSongItem(songs[0]),
+	getSongItem(songs[0]),
+	getSongItem(songs[0]),
+	getSongItem(songs[0]),
+	getSongItem(songs[0]),
+	getSongItem(songs[0]),
 ];
 
 const Album = ({ params }: { params: { slug: TemplateString } }) => {
-    const [isPlay, setPlay] = useState<boolean>(false);
+	const [isView, setView] = useState<boolean>(false);
 
-    const [isFavorite, setFavorite] = useState<boolean>(false);
+	const handleOnView = useCallback((inView: boolean) => {
+		setView(inView);
+	}, []);
 
-    const handleClickPlay = () => {
-        setPlay(!isPlay);
-    };
-
-    const handleClickFavorite = () => {
-        setFavorite(!isFavorite);
-    };
-
-    return (
-        <div className="w-full h-full">
-            <div className="flex flex-row items-center justify-start px-4 pt-2 ">
-                <Avatar shape="square" size={144} />
-                <div className="flex flex-col w-full ml-4">
-                    <div className="text-base">Bài hát</div>
-                    <div className="text-base text-white">
-                        Hello tat ca moi nguoi
-                    </div>
-                </div>
-            </div>
-
-            <div className="flex flex-row items-center justify-start px-4 pt-2 gap-4">
-                <div className="flex flex-row items-center justify-around h-10 w-10 bg-white rounded-full">
-                    <FontAwesomeIcon
-                        icon={isPlay ? faPause : faPlay}
-                        onClick={handleClickPlay}
-                    />
-                </div>
-                <FontAwesomeIcon
-                    icon={isFavorite ? faSolidHeart : faRegularHeart}
-                    onClick={handleClickFavorite}
-                    className="text-2xl text-white"
-                />
-            </div>
-
-            <div className="flex flex-col">
-                <div className="flex flex-col gap-2 p-4">
-                    <SongControl items={items} />
-                </div>
-            </div>
-        </div>
-    );
+	return (
+		<Space direction="vertical" className="w-full p-4" size={16}>
+			<Avatar
+				type="album"
+				aNumberOfSongs={20}
+				year={2000}
+				id="16"
+				name="hello"
+				following={5}
+				time={1000}
+			/>
+			<Control onView={handleOnView} />
+			<SongForAlbunContainer items={songs}></SongForAlbunContainer>
+		</Space>
+	);
 };
 
 export default Album;

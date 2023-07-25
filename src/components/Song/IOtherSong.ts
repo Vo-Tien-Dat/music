@@ -1,3 +1,3 @@
 export default interface IOtherSong {
-    pos?: string | number;
+	pos?: string | number;
 }

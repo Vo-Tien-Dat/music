@@ -1,20 +1,50 @@
-import FilterItem from './FilterItem';
-import FilterMenuType from './FilterMenuType';
+import React, { useEffect, useState } from 'react';
+import FilterMenuItem from './FilterMenuItem';
+type OptionMenuType = 'multiple' | 'single';
 
-type FilterMenuProps = FilterMenuType;
+type IFilterMenu = {
+	space?: number | string;
+	children?: React.ReactNode | React.ReactNode[] | string[] | string;
+	option?: OptionMenuType;
+};
+
+const defaultFilterMenu: IFilterMenu = {
+	space: 8,
+	option: 'single',
+};
+
+export type FilterMenuProps = IFilterMenu;
 
 const FilterMenu = (props: FilterMenuProps) => {
-    const handleClickFilter = (key: string | number) => {
-        props.onClick?.(key);
-    };
+	const conditions: any[] = [];
 
-    return (
-        <div className="flex flex-row gap-1">
-            {props.items?.map((item: React.ReactNode, key: number) => {
-                return <FilterItem label={item} />;
-            })}
-        </div>
-    );
+	useEffect(() => {}, []);
+
+	return (
+		<div
+			className="flex flex-row"
+			style={{
+				gap: props.space ?? defaultFilterMenu.space,
+			}}
+		>
+			{!!props.children &&
+				React.Children.map(props.children, (child: any) => {
+					if (!!child) {
+						const element = <FilterMenuItem />;
+						if (
+							React.isValidElement(element) &&
+							element.type === FilterMenuItem
+						) {
+							conditions.push(child.props.condition);
+							return React.cloneElement(child, {
+								...child.props,
+							});
+						}
+					}
+					return <></>;
+				})}
+		</div>
+	);
 };
 
 export default FilterMenu;
